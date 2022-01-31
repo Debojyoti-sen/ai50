@@ -85,14 +85,7 @@ def main():
 
 
 def shortest_path(source, target):
-    """
-    Returns the shortest list of (movie_id, person_id) pairs
-    that connect the source to the target.
-
-    If no possible path, returns None.
-    """
-
-       # For keeping track of how many nodes have been explored
+       # For keeping track of how many nodes have been exploreded
     num_explored = 0
 
     start = Node(state=source, parent=None, action=None)
@@ -113,13 +106,11 @@ def shortest_path(source, target):
 
         # Mark actor (node) as explored
         explored.add(node.state)
-        # Find the neighbors (actors to which he can connect) of the actor
         neighbors = neighbors_for_person(node.state)
         for movie, actor in neighbors:
             if actor not in explored and  not frontier.contains_state(actor):
                 child = Node(state=actor, parent=node, action=movie)
                 if child.state == target:
-                    # Return list of tuples (movie_id, actor_id)
                     path = []
                     node = child
                     while node.parent is not None:
